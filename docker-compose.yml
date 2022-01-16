@@ -6,6 +6,9 @@ services:
       - "8080:81"
     networks: 
       - myNetwork
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: always
   mysql:
     image: mysql/mysql-server:latest
     ports:
@@ -17,19 +20,22 @@ services:
       - MYSQL_ROOT_HOST=0.0.0.0/0
     networks: 
       - myNetwork
+    restart: always
   backend:
     image: "jbabeau/capstone_backend:1"
     ports:
      - "3000:3000"
     networks: 
       - myNetwork
+    restart: always
   webserver:
     image: "jbabeau/capstone_webserver:1"
     ports:
      - "5000:5000"
     networks: 
       - myNetwork
+    restart: always
 
 networks:
   myNetwork:
-    name: myNetwork
+#    name: myNetwork
